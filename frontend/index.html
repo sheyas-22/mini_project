@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shreyas | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <h2>Shreyas</h2>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="glass">
+    <h1>Hi, I'm <span>Shreyas</span></h1>
+    <h2><span id="typing"></span></h2>
+    <p>I build modern full-stack web applications.</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="card reveal">
+  <h2>About Me</h2>
+  <p>I am a BCA student passionate about full-stack development.</p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="card reveal">
+  <h2>Skills</h2>
+  <div class="skills">
+    <span>HTML</span>
+    <span>CSS</span>
+    <span>JavaScript</span>
+    <span>Node.js</span>
+    <span>MongoDB</span>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="card reveal">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="project">
+      <h3>Portfolio Website</h3>
+      <p>Full-stack portfolio with MongoDB.</p>
+    </div>
+    <div class="project">
+      <h3>Contact API</h3>
+      <p>Backend API storing messages.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="card reveal">
+  <h2>Contact Me</h2>
+
+  <form id="contactForm">
+    <input id="name" placeholder="Name" required>
+    <input id="email" type="email" placeholder="Email" required>
+    <textarea id="message" placeholder="Message" required></textarea>
+    <button>Send</button>
+  </form>
+
+  <p id="response"></p>
+</section>
+
+<footer>© 2026 Shreyas</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

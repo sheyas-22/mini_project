@@ -14,7 +14,7 @@ app.use(express.json());
 // ✅ MongoDB Atlas Connection
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Atlas Connected ✅"))
-.catch((err) => console.log("Connection Error ❌", err));
+.catch((err) => console.log("MongoDB Error ❌", err));
 
 // Schema
 const contactSchema = new mongoose.Schema({
@@ -27,6 +27,13 @@ const contactSchema = new mongoose.Schema({
 const Contact = mongoose.model("Contact", contactSchema);
 
 // Routes
+
+// Test route
+app.get("/", (req, res) => {
+    res.send("Server is running 🚀");
+});
+
+// Contact form route
 app.post("/contact", async (req, res) => {
     try {
         const { name, email, message } = req.body;
@@ -42,18 +49,15 @@ app.post("/contact", async (req, res) => {
         res.json({ message: "Message saved successfully ✅" });
 
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: "Error saving data ❌" });
+        console.error(error);
+        res.status(500).json({ error: "Failed to save data ❌" });
     }
 });
 
-// Test route
-app.get("/", (req, res) => {
-    res.send("Server is running 🚀");
-});
+// ✅ IMPORTANT: PORT FIX FOR RENDER
+const PORT = process.env.PORT || 5000;
 
-// Server start
-const PORT = 5000;
+// Start server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });

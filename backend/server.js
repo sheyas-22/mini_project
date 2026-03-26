@@ -1,82 +1,59 @@
-// IMPORTS
+// Import packages
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 
-// INIT APP
+// Initialize app
 const app = express();
 
-// MIDDLEWARE
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// CONNECT TO MONGODB (UPDATED - NO deprecated options)
-mongoose.connect("mongodb://127.0.0.1:27017/portfolioDB")
-  .then(() => console.log("MongoDB Connected ✅"))
-  .catch((err) => console.log("MongoDB Error:", err));
+// ✅ MongoDB Atlas Connection
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log("MongoDB Atlas Connected ✅"))
+.catch((err) => console.log("Connection Error ❌", err));
 
-// SCHEMA
+// Schema
 const contactSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  message: {
-    type: String,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
+    name: String,
+    email: String,
+    message: String
 });
 
-// MODEL
+// Model
 const Contact = mongoose.model("Contact", contactSchema);
 
-// ROUTES
-
-// TEST ROUTE
-app.get("/", (req, res) => {
-  res.send("Server is running 🚀");
-});
-
-// CONTACT FORM ROUTE
+// Routes
 app.post("/contact", async (req, res) => {
-  try {
-    const { name, email, message } = req.body;
+    try {
+        const { name, email, message } = req.body;
 
-    // Basic validation
-    if (!name || !email || !message) {
-      return res.status(400).json({ message: "All fields required ⚠️" });
+        const newContact = new Contact({
+            name,
+            email,
+            message
+        });
+
+        await newContact.save();
+
+        res.json({ message: "Message saved successfully ✅" });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Error saving data ❌" });
     }
-
-    const newContact = new Contact({
-      name,
-      email,
-      message
-    });
-
-    await newContact.save();
-
-    res.status(200).json({
-      message: "Message saved successfully ✅"
-    });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      message: "Server error ❌"
-    });
-  }
 });
 
-// START SERVER
+// Test route
+app.get("/", (req, res) => {
+    res.send("Server is running 🚀");
+});
+
+// Server start
 const PORT = 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });

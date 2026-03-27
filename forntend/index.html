@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shreyas | Portfolio</title>
 
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- External CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -27,30 +24,36 @@
 
 <!-- HERO -->
 <div class="hero">
+
+  <img src="images/profile.jpg" alt="Profile Picture" class="profile">
+
   <div>
     <h1>Hi, I'm <span>Shreyas</span> 👋</h1>
     <p>Aspiring Developer building real-world projects</p>
     <a href="#projects"><button class="btn">View Projects</button></a>
   </div>
+
 </div>
 
 <!-- ABOUT -->
 <section id="about">
   <h2>About Me</h2>
   <p class="about">
-    I'm a BCA student learning C++ and Web Development. I focus on building practical projects
-    and improving problem-solving skills to become a skilled software developer.
+    I'm a BCA student learning C++ and Web Development. I focus on building
+    practical projects and improving problem-solving skills to become a
+    skilled software developer.
   </p>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
   <h2>Projects</h2>
+
   <div class="projects">
 
     <div class="card">
       <h3>Portfolio Website</h3>
-      <p>Modern responsive portfolio using HTML & CSS.</p>
+      <p>Modern responsive portfolio using HTML, CSS and JavaScript.</p>
       <a href="#">GitHub →</a>
     </div>
 
@@ -71,6 +74,7 @@
 <!-- SKILLS -->
 <section id="skills">
   <h2>Skills</h2>
+
   <div class="skills">
     <span>HTML</span>
     <span>CSS</span>
@@ -86,10 +90,15 @@
   <h2>Contact Me</h2>
 
   <form id="contactForm">
-    <input type="text" id="name" placeholder="Your Name" required><br><br>
-    <input type="email" id="email" placeholder="Your Email" required><br><br>
-    <textarea id="message" placeholder="Your Message" required></textarea><br><br>
+
+    <input type="text" id="name" placeholder="Your Name" required>
+
+    <input type="email" id="email" placeholder="Your Email" required>
+
+    <textarea id="message" placeholder="Your Message" required></textarea>
+
     <button type="submit" class="btn">Send Message</button>
+
   </form>
 
   <div class="contact">
@@ -99,42 +108,11 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2026 Shreyas. Built with 💻</p>
 </footer>
 
-<!-- JS FOR FORM -->
-<script>
-document.getElementById("contactForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
-
-  const data = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    message: document.getElementById("message").value
-  };
-
-  try {
-    const res = await fetch("http://localhost:5000/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-    if (res.ok) {
-      alert("Message Sent Successfully 🚀");
-    } else {
-      alert("Error sending message");
-    }
-
-  } catch (err) {
-    alert("Server not running ⚠️");
-  }
-});
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>

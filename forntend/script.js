@@ -1,24 +1,43 @@
-document.getElementById("contact-form").addEventListener("submit", async function(e) {
-    e.preventDefault();
+document.getElementById("contactForm").addEventListener("submit", async function(e){
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
+e.preventDefault();
 
-    try {
-        const res = await fetch("http://localhost:5000/contact", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ name, email, message })
-        });
+const data={
+name:document.getElementById("name").value,
+email:document.getElementById("email").value,
+message:document.getElementById("message").value
+};
 
-        const data = await res.json();
-        alert("Message Sent ✅");
+try{
 
-    } catch (err) {
-        console.error(err);
-        alert("Error ❌");
-    }
+const res=await fetch("https://mini-project-e3sr.onrender.com/contact",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(data)
+
+});
+
+if(res.ok){
+
+alert("Message Sent Successfully 🚀");
+
+document.getElementById("contactForm").reset();
+
+}else{
+
+alert("Error sending message");
+
+}
+
+}catch(err){
+
+alert("Server error");
+
+}
+
 });
